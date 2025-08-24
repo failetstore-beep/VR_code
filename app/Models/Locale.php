@@ -1,6 +1,9 @@
 <?php
 namespace App\Models;
 
-class Locale {
-    // Locale model placeholder
+use Illuminate\Database\Eloquent\Model;
+
+class Locale extends Model
+{
+    protected $fillable = ['product_id','key','en','ar'];
 }

@@ -1,10 +1,24 @@
 <?php
 namespace App\Http\Controllers\Api;
 
-class EventApi
+use App\Http\Controllers\Controller;
+use App\Models\Event;
+use Illuminate\Http\Request;
+
+class EventApi extends Controller
 {
-    public function store()
+    public function store(Request $request)
     {
-        return json_encode(['status'=>'ok']);
+        $data = $request->validate([
+            'product_id' => 'required|integer',
+            'embed_id' => 'nullable|integer',
+            'type' => 'required|string',
+            'data' => 'array',
+        ]);
+        $data['ip'] = $request->ip();
+        $data['ua'] = $request->userAgent();
+        $data['created_at'] = now();
+        $event = Event::create($data);
+        return ['status' => 'ok', 'id' => $event->id];
     }
 }

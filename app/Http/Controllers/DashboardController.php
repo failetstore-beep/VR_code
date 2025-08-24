@@ -5,6 +5,6 @@ class DashboardController
 {
     public function index()
     {
-        return 'Dashboard Home';
+        return view('dashboard.index');
     }
 }

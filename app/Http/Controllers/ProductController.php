@@ -1,40 +1,43 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+use Illuminate\Http\Request;
+
 class ProductController
 {
     public function index()
     {
-        return 'Products List';
+        $products = Product::all();
+        return view('dashboard.products.index', compact('products'));
     }
 
     public function create()
     {
-        return 'Create Product Form';
+        $product = new Product();
+        return view('dashboard.products.create', compact('product'));
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        return 'Store Product';
+        // Placeholder store logic
+        return redirect()->route('dashboard.products.index');
     }
 
-    public function show($id)
+    public function edit(Product $product)
     {
-        return "Show Product {$id}";
+        return view('dashboard.products.edit', compact('product'));
     }
 
-    public function edit($id)
+    public function update(Request $request, Product $product)
     {
-        return "Edit Product {$id}";
+        // Placeholder update logic
+        return redirect()->route('dashboard.products.index');
     }
 
-    public function update($id)
+    public function destroy(Product $product)
     {
-        return "Update Product {$id}";
-    }
-
-    public function destroy($id)
-    {
-        return "Delete Product {$id}";
+        // Placeholder delete logic
+        return redirect()->route('dashboard.products.index');
     }
 }

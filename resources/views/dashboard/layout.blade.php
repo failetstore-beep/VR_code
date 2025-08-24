@@ -1,17 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>@yield('title','Dashboard') - Augmira</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    @stack('styles')
+    @if(app()->getLocale() === 'ar')
+        <link rel="stylesheet" href="/css/rtl.css">
+    @endif
 </head>
 <body>
-    <nav>
-        <a href="/dashboard">Home</a>
-        <a href="/dashboard/products">Products</a>
-        <a href="/dashboard/embeds">Embeds</a>
-    </nav>
-    <div>
+    @include('partials.topnav')
+    <div class="container py-3">
         @yield('content')
     </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    @stack('scripts')
 </body>
 </html>
